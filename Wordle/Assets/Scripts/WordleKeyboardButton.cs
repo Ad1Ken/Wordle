@@ -25,7 +25,8 @@ public class WordleKeyboardButton : MonoBehaviour
     public void OnCLickButton()
     {
         WordleManagers.Instance.AddLetter(letterText.text);
-        WordleManagers.Instance.buttonsPressed.Add(this);
+        if(WordleManagers.Instance.buttonsPressed.Count<5)
+            WordleManagers.Instance.buttonsPressed.Add(this);
     }
 
     public void OnCLickEnter()
@@ -35,7 +36,8 @@ public class WordleKeyboardButton : MonoBehaviour
     public void OnClickDelete()
     {
         WordleManagers.Instance.DeleteLetter();
-        WordleManagers.Instance.buttonsPressed.RemoveAt(WordleManagers.Instance.buttonsPressed.Count - 1);
+        if (WordleManagers.Instance.buttonsPressed.Count > 0)
+            WordleManagers.Instance.buttonsPressed.RemoveAt(WordleManagers.Instance.buttonsPressed.Count - 1);
     }
     #endregion
 

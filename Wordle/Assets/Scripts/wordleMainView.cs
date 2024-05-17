@@ -70,18 +70,28 @@ public class wordleMainView : BaseView
     {
         if (Input.anyKeyDown)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 Debug.Log("EnterPressed2");
                 WordleManagers.Instance.SubmitWord();
             }
             if (Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace))
-                WordleManagers.Instance.DeleteLetter();
+            {
+                if (WordleManagers.Instance.currentWord.Length > 0)
+                {
+                    WordleManagers.Instance.DeleteLetter();
+                    WordleManagers.Instance.buttonsPressed.RemoveAt(WordleManagers.Instance.buttonsPressed.Count - 1);
+                }
+            }
             else
                 foreach (KeyCode keyCode in validkeyCodes)
                     if (Input.GetKeyDown(keyCode))
                     {
+                        Debug.Log("Called1");
                         WordleManagers.Instance.AddLetter(keyCode.ToString());
+                        char temp = (char)keyCode;
+                        Debug.Log("Keycode: " + temp + ": " + WordleManagers.Instance.characterNames.IndexOf(temp.ToString().ToUpper()));
+                        WordleManagers.Instance.buttonsPressed.Add(keyboardlettersButtons[WordleManagers.Instance.characterNames.IndexOf(temp.ToString().ToUpper())]);
                         //AddLetter(keyCode.ToString());
                         break;
                     }       

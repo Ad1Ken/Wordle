@@ -6,7 +6,22 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"D:/Builds/Test build 2;D:/Builds/Build;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"D:/Builds/Final build 2;D:/Builds/Final Build;D:/Builds/Test Build 8;D:/Builds/Test Build 7;D:/Builds/Test build 6;D:/Builds/Test Build 5;D:/Builds/Test build 4;D:/Builds/Test build 2;D:/Builds/Build;\"}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "createDefaultBuildsFolder",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "firstTime",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "autoPublish",
+                "value": "{\"m_Value\":true}"
             }
         ]
     }

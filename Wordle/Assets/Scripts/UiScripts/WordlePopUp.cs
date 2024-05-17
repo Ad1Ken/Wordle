@@ -7,6 +7,7 @@ public class WordlePopUp : BaseView
 {
     #region PUBLIC_PROPERTIES
     public TextMeshProUGUI disPlayText;
+    public TextMeshProUGUI correctWordText;
 
     #endregion
 
@@ -18,11 +19,17 @@ public class WordlePopUp : BaseView
     #region UNITY_CALLBACKS
     private void OnEnable()
     {
+        correctWordText.gameObject.SetActive(false);
         ShowCloseButton();
     }
     #endregion
 
     #region PUBLIC_METHODS
+    public void ShowWinWord(string word)
+    {
+        correctWordText.gameObject.SetActive(true);
+        correctWordText.text = "Correct Word: " + word;
+    }
 
     public void ShowText(string textMsg)
     {

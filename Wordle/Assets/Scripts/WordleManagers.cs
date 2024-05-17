@@ -62,6 +62,7 @@ public class WordleManagers : MonoBehaviour
     {
         ResetActivity();
         winWord = GetRandomWord();
+        //winWord = "abled";
         tempWinWord = winWord;
     }
 
@@ -96,7 +97,10 @@ public class WordleManagers : MonoBehaviour
     }
     public void MoveToNextWord()
     {
+        Debug.Log("MoveToNextWord1");
+
         isValidAnswer();
+        Debug.Log("MoveToNextWord2");
         currentWordIndex++;
         currentLetterIndex = 0;
         currentWord = "";
@@ -108,7 +112,6 @@ public class WordleManagers : MonoBehaviour
             GameLost();
             Debug.Log("That was the last chance");
         }
-        ShowHint();
     }
 
     public void DeleteLetter()
@@ -125,6 +128,7 @@ public class WordleManagers : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
+            Debug.Log("count " + i);
             if (IsCorrectPlace(i))
             {
                 Debug.Log("correctAndCorrectPlaceColor");
@@ -133,24 +137,27 @@ public class WordleManagers : MonoBehaviour
             }
             else if(IsLetterInWord(i))
             {
-                for (int j = i; j < 5; j++)
-                {
-                    if(currentWord[i] == winWord[j])
-                    {
-                        Debug.Log("notInWordColor");
-                        WordleUiManager.Instance.panelWordleMainView.AddColor(i, notInWordColor);
-                        buttonsPressed[i].SetContainerColor(notInWordColor);
-                    }
-                    else
-                    {
-                        Debug.Log("correctButWrongPlaceColor");
-                        WordleUiManager.Instance.panelWordleMainView.AddColor(i, correctButWrongPlaceColor);
-                        buttonsPressed[i].SetContainerColor(correctButWrongPlaceColor);
-                    }
-                }
+                //for (int j = 0; j < 5; j++)
+                //{
+                //    if(currentWord[i] == winWord[j])
+                //    {
+                //        Debug.Log("correctAndCorrectPlaceColor2");
+                //        WordleUiManager.Instance.panelWordleMainView.AddColor(i, correctAndCorrectPlaceColor);
+                //        buttonsPressed[i].SetContainerColor(correctAndCorrectPlaceColor);
+                //    }
+                //    else
+                //    {
+                //        Debug.Log("correctButWrongPlaceColor");
+                //        WordleUiManager.Instance.panelWordleMainView.AddColor(i, correctButWrongPlaceColor);
+                //        if(buttonsPressed[i].containerImage.color != correctAndCorrectPlaceColor)
+                //            buttonsPressed[i].SetContainerColor(correctButWrongPlaceColor);
+                //    }
+                //}
+                CheckDuplicacy(i);
             }
             else
             {
+                Debug.Log("notInWordColor");
                 WordleUiManager.Instance.panelWordleMainView.AddColor(i, notInWordColor);
                 buttonsPressed[i].SetContainerColor(notInWordColor);
             }
@@ -162,9 +169,9 @@ public class WordleManagers : MonoBehaviour
             return;
         if(currentWord.Length < 5)
         {
-            Debug.Log("Not Enought letters");
+            Debug.Log("Not Enough letters");
             WordleUiManager.Instance.panelPopUp.ShowView();
-            WordleUiManager.Instance.panelPopUp.ShowText("Not Enought letters");
+            WordleUiManager.Instance.panelPopUp.ShowText("Not Enough letters");
             return;
         }
         if(!CheckIfWordIsValid())
@@ -194,6 +201,9 @@ public class WordleManagers : MonoBehaviour
     public void GameLost()
     {
         isGameEnded = true;
+        WordleUiManager.Instance.panelPopUp.ShowView();
+        WordleUiManager.Instance.panelPopUp.ShowText("GameLose");
+        WordleUiManager.Instance.panelPopUp.ShowWinWord(winWord);
     }
     #endregion
 
@@ -226,6 +236,28 @@ public class WordleManagers : MonoBehaviour
     private bool CheckIfWordIsValid()
     {
         return validWords.Contains(currentWord);
+    }
+    public void CheckDuplicacy(int k)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if(currentWord[k] == currentWord[i])
+            {
+                if(currentWord[i] == winWord[i])
+                {
+                    WordleUiManager.Instance.panelWordleMainView.AddColor(k, notInWordColor);
+                    if (buttonsPressed[k].containerImage.color != correctAndCorrectPlaceColor)
+                        buttonsPressed[k].SetContainerColor(notInWordColor);
+                }
+               
+            }
+            else
+            {
+                WordleUiManager.Instance.panelWordleMainView.AddColor(k, correctButWrongPlaceColor);
+                if (buttonsPressed[k].containerImage.color != correctAndCorrectPlaceColor)
+                    buttonsPressed[k].SetContainerColor(correctButWrongPlaceColor);
+            }
+        }
     }
     #endregion
 
