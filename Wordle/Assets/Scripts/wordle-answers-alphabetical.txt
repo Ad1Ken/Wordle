@@ -2313,3 +2313,9 @@ youth
 zebra
 zesty
 zonal
+BALSA
+GUANO
+KAZOO
+LASER
+PIOUS
+SNAFU
